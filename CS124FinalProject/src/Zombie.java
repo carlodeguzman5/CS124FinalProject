@@ -22,5 +22,12 @@ public abstract class Zombie implements Runnable{
 		return size;  
 	}
 	
+	public boolean checkHit(Bullet b){
+		if(b.x2 < xpos+size && b.x2 > xpos && b.y2 > ypos && b.y2 < ypos+size){
+			return true;
+		}
+		return false;
+	}
+	
 	public abstract void draw(Graphics g);
 }

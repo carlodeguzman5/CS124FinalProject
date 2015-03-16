@@ -6,27 +6,35 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
  
 public class GameEngine extends Canvas{
-	protected final int characterSize = 20;
 	protected final int canvasX = 500;
-	protected final int canvasY = 470;
+	protected final int canvasY = 500;
+	protected int centerX, centerY;
 	
 	protected ZombieFactory factory;
 	protected Player character;
 	
-	protected double rad;
-	protected double mouseX, mouseY;
+	protected double rad, mouseX, mouseY;
 	protected ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
+	protected ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 	 
 	private int stage;
 	
 	public GameEngine() throws FileNotFoundException{
+		setSize(canvasX, canvasY);
+		
+		character = new Player(this);
+		factory = new ZombieFactory(this);
+		
+		centerX = getWidth()/2;
+		centerY = getHeight()/2;
+		
 		setBackground(Color.BLACK);
 		rad = 0;
 		mouseX = 1;
 		mouseY = 1;
 		
-		character = new Player();
-		factory = new ZombieFactory(this);
+		
+		
 		
 		stage = 1;
 		
@@ -46,14 +54,18 @@ public class GameEngine extends Canvas{
 		gra = offscreen.getGraphics();
 	
 		gra.setColor(Color.WHITE);
-		gra.fillArc(getWidth()/2, getHeight()/2, characterSize, characterSize, 0, 360);
+		gra.fillArc(centerX-character.getSize()/2, centerY-character.getSize()/2, character.getSize(), character.getSize(), 0, 360);
 		
 		rad = Math.atan2(mouseY,mouseX);
 		character.setDirection(rad);
-		gra.drawLine(getWidth()/2+characterSize/2, getHeight()/2+characterSize/2, (int)(Math.cos(rad) * 50 + (getWidth()/2 + characterSize/2)), (int)(Math.sin(rad) * 50 + (getHeight()/2 + characterSize/2)));
+		gra.drawLine(centerX, centerY, (int)(Math.cos(rad) * 50 + centerX), (int)(Math.sin(rad) * 50 + centerY));
 		
 		for(int i = 0; i < zombieList.size(); i++){
 			zombieList.get(i).draw(gra);
+		}
+		
+		for(int i = 0; i < bulletList.size(); i++){
+			bulletList.get(i).draw(gra);
 		}
 		
 		/*System.out.println("X:"+mouseX);
@@ -63,7 +75,17 @@ public class GameEngine extends Canvas{
 		
 		g.drawImage(offscreen, 0, 0, null);
 		
+		checkGameState();
 		
 	}
 	
+	public void checkGameState(){
+		for(int i = 0; i < zombieList.size(); i++){
+			for(int j = 0; j < bulletList.size(); j++){
+				if(zombieList.get(i).checkHit(bulletList.get(j))){
+					bulletList.remove(bulletList.get(j));
+				}
+			}
+		}
+	}
 }

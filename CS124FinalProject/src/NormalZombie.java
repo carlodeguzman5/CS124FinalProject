@@ -8,11 +8,13 @@ public class NormalZombie extends Zombie{
 		xpos = (int) (Math.random() * 300);
 		//ypos = (int) (Math.random() * 400);
 		
-		ypos = (int) (Math.pow(SPAWN_RADIUS,2) - Math.pow(xpos, 2));
-		ypos = (int) Math.sqrt(ypos);
+		ypos = (int) (Math.pow(SPAWN_RADIUS,2) - Math.pow(xpos-250, 2));
+		ypos = (int) Math.sqrt(ypos) - 100;
 		
 		// X^2 + Y^2 = R^2
 		// R^2 - X^2  = Y^2
+		
+		//r^2 - (x-)
 		
 		Thread runner = new Thread(this);
 		runner.start();

@@ -25,10 +25,10 @@ import javax.swing.border.EmptyBorder;
 import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 
-public class MainWindow extends JFrame implements KeyListener, MouseMotionListener{
+public class MainWindow extends JFrame implements KeyListener, MouseMotionListener, MouseListener{
 
 	private JPanel contentPane;
-	private GameEngine canvas;
+	private GameEngine engine;
 
 	/**
 	 * Create the frame.
@@ -43,24 +43,25 @@ public class MainWindow extends JFrame implements KeyListener, MouseMotionListen
 		setContentPane(contentPane);
 		contentPane.setLayout(null); 
 		
-		canvas = new GameEngine();
-		canvas.setBounds(0,0,getWidth(),getHeight()-30);
-		contentPane.add(canvas);
+		engine = new GameEngine();
+		engine.setBounds(0,0,getWidth(),getHeight()-30);
+		contentPane.add(engine);
 		
 		InfoFrame infoFrame = new InfoFrame();
 		infoFrame.setVisible(true);
 
-		canvas.addKeyListener(this);
-		canvas.addMouseMotionListener(this);
+		engine.addKeyListener(this);
+		engine.addMouseMotionListener(this);
+		engine.addMouseListener(this);
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-			canvas.rad += Math.PI/12;
+			engine.rad += Math.PI/12;
 		}
 		else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-			canvas.rad -= Math.PI/12;
+			engine.rad -= Math.PI/12;
 		}
 		
 	}
@@ -74,21 +75,50 @@ public class MainWindow extends JFrame implements KeyListener, MouseMotionListen
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			//canvas
+			
 		}
 		
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent me) {
+		engine.mouseX =  me.getPoint().getX() - engine.getWidth()/2 + engine.character.getSize()/2;
+		engine.mouseY =  me.getPoint().getY() - engine.getHeight()/2 + engine.character.getSize()/2;
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent me) {
+		engine.mouseX =  me.getPoint().getX() - engine.getWidth()/2 + engine.character.getSize()/2;
+		engine.mouseY =  me.getPoint().getY() - engine.getHeight()/2 + engine.character.getSize()/2;
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent me) {
-		canvas.mouseX =  me.getPoint().getX() - canvas.getWidth()/2 + canvas.characterSize/2;
-		canvas.mouseY =  me.getPoint().getY() - canvas.getHeight()/2 + canvas.characterSize/2;
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		engine.character.attack();
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
