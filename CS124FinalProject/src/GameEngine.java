@@ -19,7 +19,12 @@ public class GameEngine extends Canvas{
 	 
 	private int stage;
 	
+	InfoFrame infoFrame;
 	public GameEngine() throws FileNotFoundException{
+		infoFrame = new InfoFrame(this);
+		infoFrame.setVisible(true);
+		
+		
 		setSize(canvasX, canvasY);
 		
 		character = new Player(this);
@@ -80,10 +85,12 @@ public class GameEngine extends Canvas{
 	}
 	
 	public void checkGameState(){
+		infoFrame.setZombieCount(zombieList.size());
 		for(int i = 0; i < zombieList.size(); i++){
 			for(int j = 0; j < bulletList.size(); j++){
 				if(zombieList.get(i).checkHit(bulletList.get(j))){
 					bulletList.remove(bulletList.get(j));
+					zombieList.remove(zombieList.get(i));
 				}
 			}
 		}

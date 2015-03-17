@@ -28,7 +28,7 @@ public class Bullet implements Runnable{
 	public void run() {
 		while(true){
 			try {
-				Thread.sleep(10);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

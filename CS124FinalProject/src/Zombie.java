@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 public abstract class Zombie implements Runnable{
 	private ZombieFlyWeight source;
-	private int size;
+	//private int size;
 	protected int targetX, targetY, xpos, ypos;
 	protected State state;
 	
@@ -13,17 +13,17 @@ public abstract class Zombie implements Runnable{
 
 	public void setSource(ZombieFlyWeight s){
 		source = s;
-		size = source.getSize();
+		//size = source.getSize();
 		targetX = source.getTargetX();
 		targetY = source.getTargetY();
 		
 	}
 	public int getSize(){
-		return size;  
+		return source.getSize();
 	}
 	
 	public boolean checkHit(Bullet b){
-		if(b.x2 < xpos+size && b.x2 > xpos && b.y2 > ypos && b.y2 < ypos+size){
+		if(b.x2 < xpos+getSize() && b.x2 > xpos && b.y2 > ypos && b.y2 < ypos+getSize()){
 			return true;
 		}
 		return false;

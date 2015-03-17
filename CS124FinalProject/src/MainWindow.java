@@ -36,6 +36,7 @@ public class MainWindow extends JFrame implements KeyListener, MouseMotionListen
 	 */
 	public MainWindow() throws FileNotFoundException {
 		setResizable(false);
+		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		contentPane = new JPanel();
@@ -47,8 +48,7 @@ public class MainWindow extends JFrame implements KeyListener, MouseMotionListen
 		engine.setBounds(0,0,getWidth(),getHeight()-30);
 		contentPane.add(engine);
 		
-		InfoFrame infoFrame = new InfoFrame();
-		infoFrame.setVisible(true);
+		
 
 		engine.addKeyListener(this);
 		engine.addMouseMotionListener(this);

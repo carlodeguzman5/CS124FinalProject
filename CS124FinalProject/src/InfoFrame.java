@@ -5,10 +5,16 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 public class InfoFrame extends JFrame {
-	public InfoFrame() {
+	JLabel lblStageNum, lblZombieCount;	
+	GameEngine engine;
+	JProgressBar progressBar;
+	public InfoFrame(GameEngine ge) {
 		setBounds(800, 20, 300, 600);
+		setAlwaysOnTop(true);
 		setResizable(false);
 		getContentPane().setLayout(null);
+		
+		engine = ge;
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 274, 150);
@@ -19,15 +25,17 @@ public class InfoFrame extends JFrame {
 		lblStage.setBounds(10, 11, 61, 14);
 		panel.add(lblStage);
 		
-		JLabel lblStagenum = new JLabel("1");
-		lblStagenum.setBounds(118, 11, 77, 14);
-		panel.add(lblStagenum);
+		lblStageNum = new JLabel("1");
+		lblStageNum.setBounds(118, 11, 77, 14);
+		panel.add(lblStageNum);
 		
 		JLabel lblHealth = new JLabel("Health");
 		lblHealth.setBounds(10, 36, 46, 14);
 		panel.add(lblHealth);
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
+		progressBar.setMaximum(100);
+		progressBar.setValue(100);
 		progressBar.setBounds(118, 36, 146, 14);
 		panel.add(progressBar);
 		
@@ -35,8 +43,23 @@ public class InfoFrame extends JFrame {
 		lblZombiesLeft.setBounds(10, 61, 84, 14);
 		panel.add(lblZombiesLeft);
 		
-		JLabel lblZombiecount = new JLabel("<number>");
-		lblZombiecount.setBounds(118, 61, 77, 14);
-		panel.add(lblZombiecount);
+		lblZombieCount = new JLabel("<number>");
+		lblZombieCount.setBounds(118, 61, 77, 14);
+		panel.add(lblZombieCount);
 	}
+	
+	public JLabel getLblStageNum() {
+		return lblStageNum;
+	}
+	public void increaseStage() {
+		int x = Integer.parseInt(lblStageNum.getText());
+		lblStageNum.setText((x++) + "");
+	}
+	public JLabel getZombieCount() {
+		return lblZombieCount;
+	}
+	public void setZombieCount(int x) {
+		lblZombieCount.setText(x + "");
+	}
+	
 }
