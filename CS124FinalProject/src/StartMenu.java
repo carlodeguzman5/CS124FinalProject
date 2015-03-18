@@ -84,8 +84,6 @@ public class StartMenu extends JFrame {
 		JButton btnStartGame, btnHelp, btnQuit;
 	
 		
-		
-		
 		btnStartGame = new JButton();
 		btnStartGame.setBackground(Color.BLACK);
 		btnStartGame.setBorder(null);
@@ -98,7 +96,7 @@ public class StartMenu extends JFrame {
 				
 				
 				Timer timer = new Timer();
-				timer.schedule(new LoadTimer(progressBar), 0, 20);
+				timer.schedule(new LoadTimer(progressBar), 0, 10);
 
 				
 				contentPane.repaint();

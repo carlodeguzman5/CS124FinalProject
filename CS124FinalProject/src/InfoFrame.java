@@ -1,19 +1,32 @@
 import javax.swing.JFrame;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import java.awt.FlowLayout;
 
 public class InfoFrame extends JFrame {
 	JLabel lblStageNum, lblZombieCount;	
+	JPanel upgradePanel;
 	GameEngine engine;
 	JProgressBar progressBar;
+	/*
+	 * Used for calculation of prices
+	 */
+	PriceVisitor visitor = new PriceVisitor();
+	ArrayList<Upgrade> upList;
+	ArrayList<JButton> btnList;
 	public InfoFrame(GameEngine ge) {
 		setBounds(800, 20, 300, 600);
 		setAlwaysOnTop(true);
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
+		upList = new ArrayList<Upgrade>();
+		btnList = new ArrayList<JButton>();
 		engine = ge;
 		
 		JPanel panel = new JPanel();
@@ -46,6 +59,14 @@ public class InfoFrame extends JFrame {
 		lblZombieCount = new JLabel("<number>");
 		lblZombieCount.setBounds(118, 61, 77, 14);
 		panel.add(lblZombieCount);
+		
+		upgradePanel = new JPanel();
+		upgradePanel.setBounds(10, 172, 274, 388);
+		getContentPane().add(upgradePanel);
+		upgradePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		
+		
 	}
 	
 	public JLabel getLblStageNum() {
@@ -63,5 +84,25 @@ public class InfoFrame extends JFrame {
 	public void decreaseZombieCount() {
 		lblZombieCount.setText( (Integer.parseInt(lblZombieCount.getText())- 1)+"");
 	}
-	
+	public void addUpgrade(Upgrade x){
+		
+		
+		upList.add(x);
+		for(Upgrade u :upList){
+			btnList.add(new JButton("<html><center>"+u.getName()+"<br> " + visitor.visit(u) + "</center></html>"));
+		}
+		for(final JButton b : btnList){
+			
+			b.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					upList.get(btnList.indexOf(b)).levelUp();
+					b.setText("<html><center>"+upList.get(btnList.indexOf(b)).getName()+"<br> " + visitor.visit(upList.get(btnList.indexOf(b))) + "</center></html>");
+				}
+			});
+			
+			b.setSize(120, 60);
+			upgradePanel.add(b);
+		}
+		upgradePanel.repaint();
+	}
 }

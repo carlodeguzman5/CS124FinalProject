@@ -9,13 +9,15 @@ import javax.imageio.ImageIO;
 public class NormalZombie extends Zombie{
 	private final int SPAWN_RADIUS = 250;
 	private BufferedImage image;
-	private double slope;
+	
 	public NormalZombie() {	
 		try {
 			image = ImageIO.read(new File("img/Zombie.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		health = 5; // Static Health
 		
 		int deg = (int) (Math.random() * 360);
 		
@@ -29,8 +31,6 @@ public class NormalZombie extends Zombie{
 	@Override
 	public void draw(Graphics g){
 		g.drawImage(image, xpos-getSize()/2, ypos-getSize()/2, getSize(), getSize(), null);
-		//g.setColor(Color.RED);
-		//g.fillArc(xpos - size/2, ypos - size/2, size, size, 0, 360);
 	}
 	
 	public void setSource(ZombieFlyWeight s){

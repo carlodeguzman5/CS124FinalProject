@@ -71,6 +71,19 @@ public class GameEngine extends Canvas{
 		threadZombieMaker.start();
 
 		stageHandler.setStage(stage);
+		
+		/*
+		 * Upgrade Instantiations
+		 * 
+		 */
+		BetterAimUpgrade aimUp = new BetterAimUpgrade();
+		infoFrame.addUpgrade(aimUp);
+		character.upgrades.add(aimUp);
+		/*
+		 * 
+		 * 
+		 */
+		
 	}
 	
 	@Override
@@ -120,8 +133,13 @@ public class GameEngine extends Canvas{
 			for(int j = 0; j < bulletList.size(); j++){
 				if(zombieList.get(i).checkHit(bulletList.get(j))){
 					bulletList.remove(bulletList.get(j));
-					zombieList.remove(zombieList.get(i));
-					infoFrame.decreaseZombieCount();
+
+					
+					if(zombieList.get(i).damage(character.getDamage())){
+						zombieList.remove(zombieList.get(i));
+						infoFrame.decreaseZombieCount();
+					}//VISITOR
+					
 				}
 			}
 		}

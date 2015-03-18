@@ -4,7 +4,7 @@ public class DefaultState implements State{
 	private double rad;
 	public DefaultState(Zombie z){
 		this.z = z;
-		
+		//rad = Math.atan2(z.ypos + 0, z.xpos + 0);
 	}
 	@Override
 	public void defaultAction() {
@@ -31,11 +31,7 @@ public class DefaultState implements State{
 				z.ypos++;
 			}
 			
-			//if(z.getTargetX() < z.xpos){
-				//rad = Math.atan2(z.xpos, z.ypos);
-				//z.xpos += Math.cos(rad);
-				//z.ypos += Math.sin(rad);
-			//}
+			
 			//else{
 				
 			//}

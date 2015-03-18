@@ -8,7 +8,7 @@ public class DamageVisitor implements Visitor{
 
 	@Override
 	public int visit(Upgrade u) {
-		return 0;
+		return u.getLevel()*u.getBaseDamage();
 	}
 	
 }
