@@ -3,7 +3,6 @@ import java.awt.Graphics;
 
 public abstract class Zombie implements Runnable{
 	private ZombieFlyWeight source;
-	//private int size;
 	protected int xpos, ypos;
 	protected State state;
 	
@@ -13,7 +12,6 @@ public abstract class Zombie implements Runnable{
 
 	public void setSource(ZombieFlyWeight s){
 		source = s;
-		//size = source.getSize();
 	}
 	public int getSize(){
 		return source.getSize();

@@ -80,7 +80,7 @@ public class GameEngine extends Canvas{
 		offscreen = (BufferedImage) createImage(getWidth(), getHeight());
 		gra = offscreen.getGraphics();
 		
-		gra.drawImage(bg,0,0,null);
+		gra.drawImage(bg,0,0,canvasX,canvasY,null);
 	
 		rad = Math.atan2(mouseY,mouseX);
 		character.setDirection(rad);

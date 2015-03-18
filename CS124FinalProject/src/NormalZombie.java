@@ -7,8 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class NormalZombie extends Zombie{
-	private final int SPAWN_RADIUS = 300;
+	private final int SPAWN_RADIUS = 250;
 	private BufferedImage image;
+	private double slope;
 	public NormalZombie() {	
 		try {
 			image = ImageIO.read(new File("img/Zombie.png"));
@@ -16,17 +17,11 @@ public class NormalZombie extends Zombie{
 			e.printStackTrace();
 		}
 		
-		xpos = (int) (Math.random() * 300);
-		//ypos = (int) (Math.random() * 400);
+		int deg = (int) (Math.random() * 360);
 		
-		ypos = (int) (Math.pow(SPAWN_RADIUS,2) - Math.pow(xpos-250, 2));
-		ypos = (int) Math.sqrt(ypos) - 100;
-		
-		// X^2 + Y^2 = R^2
-		// R^2 - X^2  = Y^2
-		
-		//r^2 - (x-)
-		
+		xpos = (int) (Math.cos(Math.toRadians(deg)) * SPAWN_RADIUS) + 250;
+		ypos = (int) (Math.sin(Math.toRadians(deg)) * SPAWN_RADIUS) + 250;
+				
 		Thread runner = new Thread(this);
 		runner.start();
 	}

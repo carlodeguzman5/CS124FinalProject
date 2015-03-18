@@ -76,6 +76,7 @@ public class StartMenu extends JFrame {
 		loadPanel.setLayout(null);
 		
 		progressBar = new JProgressBar();
+		progressBar.setForeground(Color.RED);
 		progressBar.setBounds(0, 0, 697, 46);
 		loadPanel.add(progressBar);
 		
