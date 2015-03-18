@@ -12,20 +12,20 @@ public class DefaultState implements State{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(Math.pow(z.xpos-z.targetX,2) + Math.pow(z.ypos-z.targetY,2) <= 10000 ){
+		if(Math.pow(z.xpos-z.getTargetX(),2) + Math.pow(z.ypos-z.getTargetY(),2) <= 400 ){
 			
 		}
 		else{
-			if(z.targetX < z.xpos){
+			if(z.getTargetX() < z.xpos){
 				z.xpos--;
 			}
-			if(z.targetX > z.xpos){
+			if(z.getTargetX() > z.xpos){
 				z.xpos++;
 			}
-			if(z.targetY < z.ypos){
+			if(z.getTargetY() < z.ypos){
 				z.ypos--;
 			}
-			if(z.targetY > z.ypos){
+			if(z.getTargetY() > z.ypos){
 				z.ypos++;
 			}
 		}

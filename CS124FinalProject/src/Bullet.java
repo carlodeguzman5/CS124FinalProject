@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Bullet implements Runnable{
 	private double direction;
 	private GameEngine engine;
-	private final int LENGTH = 30;
+	private final int LENGTH = 10;
 	private final int SPEED = 2;
 	
 	public double x, y, x2, y2;

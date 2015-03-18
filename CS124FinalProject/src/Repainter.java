@@ -12,7 +12,7 @@ public class Repainter implements Runnable{
 			gc.repaint();
 			gc.revalidate();
 			try {
-				Thread.sleep(33);
+				Thread.sleep(17);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

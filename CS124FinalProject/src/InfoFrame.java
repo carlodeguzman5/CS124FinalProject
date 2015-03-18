@@ -51,15 +51,17 @@ public class InfoFrame extends JFrame {
 	public JLabel getLblStageNum() {
 		return lblStageNum;
 	}
-	public void increaseStage() {
-		int x = Integer.parseInt(lblStageNum.getText());
-		lblStageNum.setText((x++) + "");
+	public void setStage(int x) {
+		lblStageNum.setText(x + "");
 	}
 	public JLabel getZombieCount() {
 		return lblZombieCount;
 	}
 	public void setZombieCount(int x) {
 		lblZombieCount.setText(x + "");
+	}
+	public void decreaseZombieCount() {
+		lblZombieCount.setText( (Integer.parseInt(lblZombieCount.getText())- 1)+"");
 	}
 	
 }

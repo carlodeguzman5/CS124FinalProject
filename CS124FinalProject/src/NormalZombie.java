@@ -1,10 +1,21 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class NormalZombie extends Zombie{
-	private int size;
 	private final int SPAWN_RADIUS = 300;
+	private BufferedImage image;
 	public NormalZombie() {	
+		try {
+			image = ImageIO.read(new File("img/Zombie.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		xpos = (int) (Math.random() * 300);
 		//ypos = (int) (Math.random() * 400);
 		
@@ -22,15 +33,13 @@ public class NormalZombie extends Zombie{
   
 	@Override
 	public void draw(Graphics g){
-		g.setColor(Color.RED);
-		g.fillArc(xpos - size/2, ypos - size/2, size, size, 0, 360);
+		g.drawImage(image, xpos-getSize()/2, ypos-getSize()/2, getSize(), getSize(), null);
+		//g.setColor(Color.RED);
+		//g.fillArc(xpos - size/2, ypos - size/2, size, size, 0, 360);
 	}
 	
 	public void setSource(ZombieFlyWeight s){
 		super.setSource(s);
-		size = super.getSize();
-		targetX = super.targetX;
-		targetY = super.targetY;
 	}
 
 	@Override

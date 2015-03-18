@@ -3,8 +3,9 @@ public class ZombieFlyWeight {
 	GameEngine game;
 	private int targetX, targetY;
 	public ZombieFlyWeight(GameEngine ge){
-		targetX = ge.canvasX/2 + ge.character.getSize()/2;
-		targetY = ge.canvasY/2 + ge.character.getSize()/2;
+		targetX = ge.centerX;
+		targetY = ge.centerY;
+		System.out.println(ge.centerX);
 	}
 	private int size = 20;
 	

@@ -2,7 +2,7 @@
 public class Player {
 	double direction;
 	GameEngine engine;
-	private final int size = 20;
+	private final int size = 50;
 	public Player(GameEngine e){
 		engine = e;
 	}
