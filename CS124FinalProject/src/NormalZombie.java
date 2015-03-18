@@ -18,6 +18,7 @@ public class NormalZombie extends Zombie{
 		}
 		
 		health = 5; // Static Health
+		damage = 10;
 		
 		int deg = (int) (Math.random() * 360);
 		
@@ -33,15 +34,16 @@ public class NormalZombie extends Zombie{
 		g.drawImage(image, xpos-getSize()/2, ypos-getSize()/2, getSize(), getSize(), null);
 	}
 	
-	public void setSource(ZombieFlyWeight s){
-		super.setSource(s);
-	}
-
 	@Override
 	public void run() {
 		while(true){
 			state.defaultAction();
 		}
+	}
+
+	@Override
+	public void attack() {
+		source.getEngine().character.damage(damage);
 	}
 	
 }

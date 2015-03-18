@@ -1,6 +1,6 @@
 
 public class ZombieFlyWeight {
-	GameEngine game;
+	GameEngine engine;
 	private int targetX, targetY;
 	public ZombieFlyWeight(GameEngine ge){
 		targetX = ge.centerX;
@@ -16,5 +16,8 @@ public class ZombieFlyWeight {
 	}
 	public int getTargetY(){
 		return targetY;
+	}
+	public GameEngine getEngine(){
+		return engine;
 	}
 }

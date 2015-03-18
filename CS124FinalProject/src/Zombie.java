@@ -2,8 +2,8 @@ import java.awt.Graphics;
 
 
 public abstract class Zombie implements Runnable{
-	private ZombieFlyWeight source;
-	protected int xpos, ypos, health;
+	protected ZombieFlyWeight source;
+	protected int xpos, ypos, health, damage;
 	protected State state;
 	
 	public Zombie(){
@@ -39,6 +39,6 @@ public abstract class Zombie implements Runnable{
 		}
 		return false;
 	}
-	
+	public abstract void attack();
 	public abstract void draw(Graphics g);
 }

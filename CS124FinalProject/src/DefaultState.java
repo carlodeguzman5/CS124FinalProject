@@ -15,7 +15,7 @@ public class DefaultState implements State{
 			e.printStackTrace();
 		}
 		if(Math.pow(z.xpos-z.getTargetX(),2) + Math.pow(z.ypos-z.getTargetY(),2) <= 400 ){
-			
+			z.state = new AttackState();
 		}
 		else{
 			if(z.getTargetX() < z.xpos){
@@ -30,19 +30,13 @@ public class DefaultState implements State{
 			if(z.getTargetY() > z.ypos){
 				z.ypos++;
 			}
-			
-			
-			//else{
-				
-			//}
-			
 		}
 		
 	}
 
 	@Override
 	public void reachedPlayer() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
