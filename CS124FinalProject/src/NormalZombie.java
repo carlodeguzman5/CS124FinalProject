@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,15 +16,16 @@ public class NormalZombie extends Zombie{
 			e.printStackTrace();
 		}
 		
-		health = 5; // Static Health
-		damage = 10;
+		health = 5; // Static Zombie Health
+		damage = 10;// Static Zombie Damage
+		bounty = 1; // Static Kill Bounty
 		
 		int deg = (int) (Math.random() * 360);
 		
 		xpos = (int) (Math.cos(Math.toRadians(deg)) * SPAWN_RADIUS) + 250;
 		ypos = (int) (Math.sin(Math.toRadians(deg)) * SPAWN_RADIUS) + 250;
 				
-		Thread runner = new Thread(this);
+		runner = new Thread(this);
 		runner.start();
 	}
   

@@ -7,6 +7,7 @@ public class Bullet implements Runnable{
 	private GameEngine engine;
 	private final int LENGTH = 10;
 	private final int SPEED = 2;
+	private Thread t;
 	
 	public double x, y, x2, y2;
 	public Bullet(double dir, GameEngine eg){
@@ -17,7 +18,7 @@ public class Bullet implements Runnable{
 		x2 = engine.centerX + (int)(Math.cos(direction)*LENGTH);
 		y2 = engine.centerY + (int)(Math.sin(direction)*LENGTH);
 		
-		Thread t = new Thread(this);
+		t = new Thread(this);
 		t.start();
 	}
 	public void draw(Graphics g){
@@ -38,5 +39,8 @@ public class Bullet implements Runnable{
 			x2 += Math.cos(direction)*SPEED;
 			y2 += Math.sin(direction)*SPEED;
 		}
+	}
+	public void killThread(){
+		t.stop();
 	}
 }

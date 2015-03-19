@@ -36,13 +36,16 @@ public class Player {
 		}
 		return temp;
 	}
-	public boolean damage(int x){
+	public void damage(int x){
 		health -= x;
+		engine.infoFrame.progressBar.setValue(health);
 		if(health <= 0){
 			health = 0;
-			return true;
+			die();
 		}
-		return false;
+	}	
+	private void die(){
+		engine.killAllThreads();
 	}
 	
 }

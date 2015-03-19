@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class InfoFrame extends JFrame {
-	JLabel lblStageNum, lblZombieCount;	
+	JLabel lblStageNum, lblZombieCount, lblDmgNum, lblGoldamount;	
 	JPanel upgradePanel;
 	GameEngine engine;
 	JProgressBar progressBar;
@@ -42,7 +44,7 @@ public class InfoFrame extends JFrame {
 		lblStageNum.setBounds(118, 11, 77, 14);
 		panel.add(lblStageNum);
 		
-		JLabel lblHealth = new JLabel("Health");
+		JLabel lblHealth = new JLabel("Health:");
 		lblHealth.setBounds(10, 36, 46, 14);
 		panel.add(lblHealth);
 		
@@ -60,10 +62,33 @@ public class InfoFrame extends JFrame {
 		lblZombieCount.setBounds(118, 61, 77, 14);
 		panel.add(lblZombieCount);
 		
+		JLabel lblDamage = new JLabel("Damage:");
+		lblDamage.setBounds(10, 86, 84, 14);
+		panel.add(lblDamage);
+		
+		lblDmgNum = new JLabel("");
+		lblDmgNum.setBounds(118, 86, 146, 14);
+		panel.add(lblDmgNum);
+		
+		JLabel lblGold = new JLabel("Gold:");
+		lblGold.setBounds(10, 111, 46, 14);
+		panel.add(lblGold);
+		
+		lblGoldamount = new JLabel("0");
+		lblGoldamount.setBounds(118, 111, 146, 14);
+		panel.add(lblGoldamount);
+		
 		upgradePanel = new JPanel();
-		upgradePanel.setBounds(10, 172, 274, 388);
+		upgradePanel.setBounds(10, 181, 274, 194);
 		getContentPane().add(upgradePanel);
 		upgradePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblUpgrades = new JLabel("UPGRADES");
+		lblUpgrades.setLocation(104, 161);
+		getContentPane().add(lblUpgrades);
+		lblUpgrades.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUpgrades.setSize(83, 19);
+		lblUpgrades.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
 		
@@ -84,6 +109,12 @@ public class InfoFrame extends JFrame {
 	public void decreaseZombieCount() {
 		lblZombieCount.setText( (Integer.parseInt(lblZombieCount.getText())- 1)+"");
 	}
+	public void setDamage(int x){
+		lblDmgNum.setText(x+"");
+	}
+	public void setGold(int x){
+		lblGoldamount.setText(x+"");
+	}
 	public void addUpgrade(Upgrade x){
 		
 		
@@ -92,11 +123,15 @@ public class InfoFrame extends JFrame {
 			btnList.add(new JButton("<html><center>"+u.getName()+"<br> " + visitor.visit(u) + "</center></html>"));
 		}
 		for(final JButton b : btnList){
-			
+			b.setEnabled(false);
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					engine.gold -= visitor.visit(upList.get(btnList.indexOf(b)));
+					engine.infoFrame.setGold(engine.gold);
 					upList.get(btnList.indexOf(b)).levelUp();
 					b.setText("<html><center>"+upList.get(btnList.indexOf(b)).getName()+"<br> " + visitor.visit(upList.get(btnList.indexOf(b))) + "</center></html>");
+					
 				}
 			});
 			

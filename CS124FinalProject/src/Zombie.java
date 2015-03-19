@@ -3,8 +3,9 @@ import java.awt.Graphics;
 
 public abstract class Zombie implements Runnable{
 	protected ZombieFlyWeight source;
-	protected int xpos, ypos, health, damage;
+	protected int xpos, ypos, health, damage, bounty;
 	protected State state;
+	protected Thread runner; 
 	
 	public Zombie(){
 		state = new DefaultState(this);
@@ -23,6 +24,17 @@ public abstract class Zombie implements Runnable{
 	
 	public int getTargetY(){
 		return source.getTargetY();
+	}
+	
+	public GameEngine getEngine(){
+		return source.getEngine();
+	}
+	
+	public void killThread(){
+		runner.suspend();
+	}
+	public int getBounty(){
+		return bounty;
 	}
 	
 	public boolean checkHit(Bullet b){

@@ -5,6 +5,7 @@ public class ZombieFlyWeight {
 	public ZombieFlyWeight(GameEngine ge){
 		targetX = ge.centerX;
 		targetY = ge.centerY;
+		engine = ge;
 	}
 	private int size = 20;
 	

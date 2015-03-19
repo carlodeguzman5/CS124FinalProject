@@ -15,7 +15,7 @@ public class DefaultState implements State{
 			e.printStackTrace();
 		}
 		if(Math.pow(z.xpos-z.getTargetX(),2) + Math.pow(z.ypos-z.getTargetY(),2) <= 400 ){
-			z.state = new AttackState();
+			z.state = new AttackState(z);
 		}
 		else{
 			if(z.getTargetX() < z.xpos){

@@ -12,7 +12,7 @@ public abstract class Upgrade {
 		level++;
 	}
 	public int getPrice(){
-		return price*level; // CAN BE A VISITOR
+		return price; // CAN BE A VISITOR
 	}
 	public String getName(){
 		return name;
