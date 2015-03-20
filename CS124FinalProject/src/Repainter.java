@@ -6,9 +6,7 @@ public class Repainter implements Runnable{
 	}
 	@Override
 	public void run() {
-		long start;
 		while(true){
-			start = System.currentTimeMillis();
 			gc.repaint();
 			gc.revalidate();
 			try {
@@ -16,10 +14,6 @@ public class Repainter implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//while(System.currentTimeMillis() - start < 1000/17){}
 		}
-		
-		
 	}
-	
 }

@@ -1,9 +1,5 @@
-import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.JProgressBar;
-
 
 public class SlowedState implements State{
 	Zombie z;

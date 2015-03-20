@@ -248,7 +248,6 @@ public class GameEngine extends Canvas{
 		threadZombieMaker.stop();
 		for(int i = 0; i < zombieList.size(); i++){
 			zombieList.get(i).killThread();
-			System.out.println("KILL");
 		}
 		for(int i = 0; i < bulletList.size(); i++){
 			bulletList.get(i).killThread();

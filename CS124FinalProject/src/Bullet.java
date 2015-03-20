@@ -5,7 +5,6 @@ import java.awt.Graphics;
 public class Bullet implements Runnable{
 	private double direction;
 	private GameEngine engine;
-	private final int LENGTH = 10;
 	private final int SPEED = 2;
 	private Thread t;
 	
@@ -15,9 +14,6 @@ public class Bullet implements Runnable{
 		engine = eg;
 		x = engine.centerX;
 		y = engine.centerY;
-		/*x2 = engine.centerX + (int)(Math.cos(direction)*LENGTH);
-		y2 = engine.centerY + (int)(Math.sin(direction)*LENGTH);
-		*/
 		t = new Thread(this);
 		t.start();
 		t.suspend();
@@ -36,9 +32,6 @@ public class Bullet implements Runnable{
 			}
 			x += Math.cos(direction)*SPEED;
 			y += Math.sin(direction)*SPEED;
-			
-		/*	x2 += Math.cos(direction)*SPEED;
-			y2 += Math.sin(direction)*SPEED;*/
 		}
 	}
 	@SuppressWarnings("deprecation")
