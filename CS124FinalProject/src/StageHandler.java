@@ -1,15 +1,15 @@
 
 public class StageHandler {
-	int totalZombieCount;
 	GameEngine engine;
 	public StageHandler(GameEngine ge){
 		engine = ge;
 	}
 	
 	public void setStage(int x){
-		totalZombieCount = x * 5 + 10;
-		engine.zMaker.setTotalZombies(totalZombieCount);
+		engine.totalZombieCount = x * 5 + 10;
+		engine.zombieKilled = 0;
 		
-		engine.infoFrame.setZombieCount(totalZombieCount);
+		engine.infoFrame.setStage(x);
+		engine.infoFrame.setZombieCount(engine.totalZombieCount);
 	}
 }

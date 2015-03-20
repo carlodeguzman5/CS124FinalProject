@@ -95,7 +95,7 @@ public class MainWindow extends JFrame implements KeyListener, MouseMotionListen
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		engine.character.attack();
+		engine.attack();
 		
 	}
 

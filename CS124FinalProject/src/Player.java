@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class Player {
-	private double direction;
+	protected double direction;
 	private GameEngine engine;
 	private final int baseDamage = 1; //will depend on weapon
 	private final int size = 50;
@@ -19,15 +19,7 @@ public class Player {
 		upgrades = new ArrayList<Upgrade>();
 		health = 100;
 	}
-	public synchronized void attack(){
-		//engine.bulletList.add(new Bullet(engine.character.direction, engine));
-		engine.bulletPool.get(0).setDirection(engine.character.direction);
-		engine.bulletPool.get(0).move();
-		engine.bulletList.add(engine.bulletPool.remove(0));
-		System.out.println("FIRE: "+engine.bulletPool.size());
 		
-		
-	}
 	public void setDirection(double x){
 		direction = x;
 	}

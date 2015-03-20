@@ -28,7 +28,7 @@ public class GameEngine extends Canvas{
 	protected ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
 	protected ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 	protected ArrayList<Bullet> bulletPool = new ArrayList<Bullet>();
-	private final int POOL_SIZE = 5;
+	private final int POOL_SIZE = 50;
 	
 	private AffineTransform tx;
 	private AffineTransformOp op;
@@ -38,8 +38,7 @@ public class GameEngine extends Canvas{
 	private Thread threadZombieMaker;
 	private boolean isOver = false;
 	
-	protected int gold;
-	protected int stage;
+	protected int gold, stage, totalZombieCount, zombieKilled, totalZombieKilled;
 	
 	private PriceVisitor visitor = new PriceVisitor();
 	
@@ -154,7 +153,7 @@ public class GameEngine extends Canvas{
         g2d.dispose();
 
 		checkGameState();
-		
+		bulletOutChecker();
 	}
 	
 	public void update(Graphics g) {
@@ -166,19 +165,25 @@ public class GameEngine extends Canvas{
 		 * Setting infoFrame Damage
 		 * Checking if stage is done
 		 */
-		infoFrame.setDamage(character.getDamage());
-		if(zMaker.isDepleted() && zombieList.isEmpty()){
+		
+		if(totalZombieCount-zombieKilled <= 0){
 			stageHandler.setStage(stage++);
-			infoFrame.setStage(stage);
 		}
+		
+		infoFrame.setDamage(character.getDamage());
 		/*
 		 * Bullet Collision checking
 		 */
 		for(int i = 0; i < zombieList.size(); i++){
 			for(int j = 0; j < bulletList.size(); j++){
 				if(zombieList.get(i).checkHit(bulletList.get(j))){
-					bulletList.remove(bulletList.get(j));
-
+					Bullet b = bulletList.get(j);
+					/*
+					 * Bullet Pool Replenish
+					 */
+					bulletList.remove(b);
+					bulletPool.add(b);
+					b.reset();
 					/*
 					 * Uses Visitor to calculate for damage
 					 */
@@ -186,10 +191,12 @@ public class GameEngine extends Canvas{
 						zombieList.get(i).killThread();
 						gold += zombieList.get(i).getBounty();
 						zombieList.remove(zombieList.get(i));
+						totalZombieKilled++;
+						zombieKilled++;
 						
 						//Updating of infoFrame
 						infoFrame.setGold(gold);
-						infoFrame.decreaseZombieCount();
+						infoFrame.setZombieCount(totalZombieCount-zombieKilled);
 					}
 					
 				}
@@ -227,6 +234,26 @@ public class GameEngine extends Canvas{
 			Timer timer = new Timer();
 			timer.schedule(new GameOverTask(), 0, RUNNING_TIME);
 		}
+		
+	}
+	
+	public void bulletOutChecker(){
+		for(int i = 0; i < bulletList.size(); i++){
+			Bullet b = bulletList.get(i);
+			if(b.x > canvasX || b.x < 0 || b.y > canvasY || b.y < 0){
+				bulletList.remove(b);
+				bulletPool.add(b);
+				b.reset();
+			}
+		}
+	}
+	
+	public synchronized void attack(){
+		//engine.bulletList.add(new Bullet(engine.character.direction, engine));
+		bulletPool.get(0).move();
+		bulletList.add(bulletPool.remove(0));
+		bulletList.get(bulletList.size()-1).setDirection(character.direction);;
+		
 		
 	}
 	

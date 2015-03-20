@@ -9,21 +9,22 @@ public class Bullet implements Runnable{
 	private final int SPEED = 2;
 	private Thread t;
 	
-	public double x, y, x2, y2;
+	public double x, y;
 	public Bullet(double dir, GameEngine eg){
 		direction = dir;
 		engine = eg;
 		x = engine.centerX;
 		y = engine.centerY;
-		x2 = engine.centerX + (int)(Math.cos(direction)*LENGTH);
+		/*x2 = engine.centerX + (int)(Math.cos(direction)*LENGTH);
 		y2 = engine.centerY + (int)(Math.sin(direction)*LENGTH);
-		
+		*/
 		t = new Thread(this);
-		//t.start();
+		t.start();
+		t.suspend();
 	}
 	public void draw(Graphics g){
 		g.setColor(Color.RED);
-		g.drawLine((int)x, (int)y, (int)x2, (int)y2);
+		g.fillArc((int)x-5,(int)y-5,10,10,0,360);
 	}
 	@Override
 	public void run() {
@@ -36,31 +37,25 @@ public class Bullet implements Runnable{
 			x += Math.cos(direction)*SPEED;
 			y += Math.sin(direction)*SPEED;
 			
-			x2 += Math.cos(direction)*SPEED;
-			y2 += Math.sin(direction)*SPEED;
-			
-			if(x > engine.canvasX || x < 0 || y > engine.canvasY || y < 0){
-				engine.bulletList.remove(this);
-				engine.bulletPool.add(this);
-				System.out.println("TEST:" + engine.bulletPool.size());
-				reset();
-			}
-			
+		/*	x2 += Math.cos(direction)*SPEED;
+			y2 += Math.sin(direction)*SPEED;*/
 		}
 	}
 	@SuppressWarnings("deprecation")
 	public void killThread(){
-		t.stop();
+		t.suspend();
 	}
 	public void setDirection(double dir){
 		direction = dir;
 	}
 	public void move(){
-		t.start();
+		t.resume();
 	}
 	public void reset(){
-		x = y = x2 = y2 = 0;
+		
+		x = engine.centerX;
+		y = engine.centerY;
 		killThread();
-		System.out.println("RESET BULLET");
+		
 	}
 }

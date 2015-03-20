@@ -3,23 +3,21 @@
 public class ZombieMaker implements Runnable{
 	private GameEngine engine;
 	private double prob;
-	private int chance, totalZombies, zombieCount;
+	private int chance; //totalZombies, zombieCount;
 	public ZombieMaker(GameEngine engine){
-		totalZombies = 15;
+		//totalZombies = 15;
 		this.engine = engine;
 		prob = 99.0;	
 	}
 	@Override
 	public void run() {
 		while(true){
-			while(zombieCount < totalZombies){
+			while(engine.zombieKilled < engine.totalZombieCount){
 				chance = (int)(Math.random() * 100);
 				if(chance > prob){
-					System.out.println(zombieCount + " | " + totalZombies);
+					//System.out.println(zombieCount + " | " + totalZombies);
 					engine.zombieList.add(engine.factory.createZombie());
-					prob = 100.0;
-					zombieCount++;
-					
+					prob = 100.0;					
 					//System.out.println("Created Enemy");
 				}
 				try {
@@ -32,22 +30,14 @@ public class ZombieMaker implements Runnable{
 			/*
 			 * Stage End
 			 */
-
-			engine.stageHandler.setStage(engine.stage++);
-			engine.infoFrame.setStage(engine.stage);
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
 			
 		}
-	}
-	
-	public void setTotalZombies(int x){
-		totalZombies = x;
-	}
-	public boolean isDepleted(){
-		if(zombieCount >= totalZombies){
-			zombieCount = 0;
-			return true;
-		}
-		return false;
 	}
 }
