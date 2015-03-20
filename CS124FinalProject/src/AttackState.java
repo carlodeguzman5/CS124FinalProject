@@ -12,13 +12,5 @@ public class AttackState implements State{
 			e.printStackTrace();
 		}
 		z.getEngine().character.damage(z.damage);
-		//System.out.println("CONTACT");
 	}
-
-	@Override
-	public void reachedPlayer() { 
-		// TODO Auto-generated method stub
-		
-	}
-
 }

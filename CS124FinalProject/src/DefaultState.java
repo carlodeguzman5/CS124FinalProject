@@ -4,7 +4,6 @@ public class DefaultState implements State{
 	private double rad;
 	public DefaultState(Zombie z){
 		this.z = z;
-		//rad = Math.atan2(z.ypos + 0, z.xpos + 0);
 	}
 	@Override
 	public void defaultAction() {
@@ -32,12 +31,5 @@ public class DefaultState implements State{
 			}
 		}
 		
-	}
-
-	@Override
-	public void reachedPlayer() {
-		
-		
-	}
-	
+	}	
 }

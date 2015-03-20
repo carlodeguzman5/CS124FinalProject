@@ -13,6 +13,7 @@ import java.awt.Font;
 public class InfoFrame extends JFrame {
 	JLabel lblStageNum, lblZombieCount, lblDmgNum, lblGoldamount;	
 	JPanel upgradePanel;
+	JButton btnSlow, btnFreeze;
 	GameEngine engine;
 	JProgressBar progressBar;
 	/*
@@ -79,7 +80,7 @@ public class InfoFrame extends JFrame {
 		panel.add(lblGoldamount);
 		
 		upgradePanel = new JPanel();
-		upgradePanel.setBounds(10, 181, 274, 194);
+		upgradePanel.setBounds(10, 181, 274, 168);
 		getContentPane().add(upgradePanel);
 		upgradePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -89,6 +90,37 @@ public class InfoFrame extends JFrame {
 		lblUpgrades.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUpgrades.setSize(83, 19);
 		lblUpgrades.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblSkills = new JLabel("SKILLS");
+		lblSkills.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSkills.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblSkills.setBounds(104, 357, 83, 19);
+		getContentPane().add(lblSkills);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 383, 274, 177);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		btnSlow = new JButton("Slow 300");
+		btnSlow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				engine.character.notifyObservers(0);
+			}
+		});
+		btnSlow.setBounds(10, 36, 254, 31);
+		btnSlow.setEnabled(false);
+		panel_1.add(btnSlow);
+		
+		btnFreeze = new JButton("Freeze 500");
+		btnFreeze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				engine.character.notifyObservers(1);
+			}
+		});
+		btnFreeze.setBounds(10, 109, 254, 31);
+		btnFreeze.setEnabled(false);
+		panel_1.add(btnFreeze);
 	
 		
 	}

@@ -45,5 +45,16 @@ public class NormalZombie extends Zombie{
 	public void attack() {
 		source.getEngine().character.damage(damage);
 	}
+
+	@Override
+	public void update(int x) {
+		if(x == 0){
+			
+		}
+		else if(x == 1){
+			
+		}
+		
+	}
 	
 }

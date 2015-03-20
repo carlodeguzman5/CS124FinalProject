@@ -213,6 +213,23 @@ public class GameEngine extends Canvas{
 				infoFrame.btnList.get(infoFrame.upList.indexOf(infoFrame.upList.get(i))).setEnabled(false);
 			}
 		}	
+		/*
+		 * Skill Price
+		 */
+		
+		if(gold >= 300){
+			infoFrame.btnSlow.setEnabled(true);
+		}
+		else{
+			infoFrame.btnSlow.setEnabled(false);
+		}
+		if(gold >= 500){
+			infoFrame.btnFreeze.setEnabled(true);
+		}
+		else{
+			infoFrame.btnFreeze.setEnabled(false);
+		}
+		
 	}
 	/*
 	 * Thread clean up
@@ -249,7 +266,6 @@ public class GameEngine extends Canvas{
 	}
 	
 	public synchronized void attack(){
-		//engine.bulletList.add(new Bullet(engine.character.direction, engine));
 		bulletPool.get(0).move();
 		bulletList.add(bulletPool.remove(0));
 		bulletList.get(bulletList.size()-1).setDirection(character.direction);;

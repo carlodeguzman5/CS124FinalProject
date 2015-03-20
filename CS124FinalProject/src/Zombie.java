@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 
 
-public abstract class Zombie implements Runnable{
+public abstract class Zombie implements Runnable, Observer{
 	protected ZombieFlyWeight source;
 	protected int xpos, ypos, health, damage, bounty, multiplier;
 	protected State state;

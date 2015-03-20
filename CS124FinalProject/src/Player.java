@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class Player {
+public class Player implements Subject{
 	protected double direction;
 	private GameEngine engine;
 	private final int baseDamage = 1; //will depend on weapon
@@ -9,6 +9,7 @@ public class Player {
 	private int health;
 	private DamageVisitor visitor;
 	
+	private ArrayList<Observer> rangeList = new ArrayList<Observer>();
 	
 	
 	ArrayList<Upgrade>upgrades;
@@ -44,6 +45,24 @@ public class Player {
 	}	
 	private void die(){
 		engine.killAllThreads();
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		rangeList.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		rangeList.remove(o);
+	}
+
+	@Override
+	public void notifyObservers(int x) {
+		for(Observer o :rangeList){
+			Zombie z = (Zombie)o;
+			z.update(x);
+		}
 	}
 	
 }
