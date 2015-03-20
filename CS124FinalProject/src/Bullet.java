@@ -19,7 +19,7 @@ public class Bullet implements Runnable{
 		y2 = engine.centerY + (int)(Math.sin(direction)*LENGTH);
 		
 		t = new Thread(this);
-		t.start();
+		//t.start();
 	}
 	public void draw(Graphics g){
 		g.setColor(Color.RED);
@@ -38,9 +38,29 @@ public class Bullet implements Runnable{
 			
 			x2 += Math.cos(direction)*SPEED;
 			y2 += Math.sin(direction)*SPEED;
+			
+			if(x > engine.canvasX || x < 0 || y > engine.canvasY || y < 0){
+				engine.bulletList.remove(this);
+				engine.bulletPool.add(this);
+				System.out.println("TEST:" + engine.bulletPool.size());
+				reset();
+			}
+			
 		}
 	}
+	@SuppressWarnings("deprecation")
 	public void killThread(){
 		t.stop();
+	}
+	public void setDirection(double dir){
+		direction = dir;
+	}
+	public void move(){
+		t.start();
+	}
+	public void reset(){
+		x = y = x2 = y2 = 0;
+		killThread();
+		System.out.println("RESET BULLET");
 	}
 }

@@ -19,8 +19,14 @@ public class Player {
 		upgrades = new ArrayList<Upgrade>();
 		health = 100;
 	}
-	public void attack(){
-		engine.bulletList.add(new Bullet(engine.character.direction, engine));
+	public synchronized void attack(){
+		//engine.bulletList.add(new Bullet(engine.character.direction, engine));
+		engine.bulletPool.get(0).setDirection(engine.character.direction);
+		engine.bulletPool.get(0).move();
+		engine.bulletList.add(engine.bulletPool.remove(0));
+		System.out.println("FIRE: "+engine.bulletPool.size());
+		
+		
 	}
 	public void setDirection(double x){
 		direction = x;

@@ -27,6 +27,8 @@ public class GameEngine extends Canvas{
 	protected double rad, mouseX, mouseY;
 	protected ArrayList<Zombie> zombieList = new ArrayList<Zombie>();
 	protected ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+	protected ArrayList<Bullet> bulletPool = new ArrayList<Bullet>();
+	private final int POOL_SIZE = 5;
 	
 	private AffineTransform tx;
 	private AffineTransformOp op;
@@ -94,12 +96,23 @@ public class GameEngine extends Canvas{
 		 * 
 		 */
 		BetterAimUpgrade aimUp = new BetterAimUpgrade();
+		ReinforcedBullets bullUp = new ReinforcedBullets();
+		
 		infoFrame.addUpgrade(aimUp);
+		infoFrame.addUpgrade(bullUp);
 		character.upgrades.add(aimUp);
+		character.upgrades.add(bullUp);
+		
+		infoFrame.init();
+		
 		/*
-		 * 
+		 * Bullet Pool Instantiation
 		 * 
 		 */
+		for(int i = 0; i < POOL_SIZE; i++){
+			bulletPool.add(new Bullet(0, this));
+		}
+		
 		
 	}
 	

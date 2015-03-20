@@ -89,8 +89,26 @@ public class InfoFrame extends JFrame {
 		lblUpgrades.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUpgrades.setSize(83, 19);
 		lblUpgrades.setHorizontalAlignment(SwingConstants.CENTER);
+	
 		
-		
+	}
+	public void init(){
+		for(final JButton b : btnList){
+			b.setEnabled(false);
+			b.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					engine.gold -= visitor.visit(upList.get(btnList.indexOf(b)));
+					engine.infoFrame.setGold(engine.gold);
+					upList.get(btnList.indexOf(b)).levelUp();
+					b.setText("<html><center>"+upList.get(btnList.indexOf(b)).getName()+"<br> " + visitor.visit(upList.get(btnList.indexOf(b))) + "</center></html>");
+					
+				}
+			});
+			
+			b.setSize(120, 60);
+			upgradePanel.add(b);
+		}
 		
 	}
 	
@@ -116,28 +134,10 @@ public class InfoFrame extends JFrame {
 		lblGoldamount.setText(x+"");
 	}
 	public void addUpgrade(Upgrade x){
-		
-		
 		upList.add(x);
-		for(Upgrade u :upList){
-			btnList.add(new JButton("<html><center>"+u.getName()+"<br> " + visitor.visit(u) + "</center></html>"));
-		}
-		for(final JButton b : btnList){
-			b.setEnabled(false);
-			b.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					engine.gold -= visitor.visit(upList.get(btnList.indexOf(b)));
-					engine.infoFrame.setGold(engine.gold);
-					upList.get(btnList.indexOf(b)).levelUp();
-					b.setText("<html><center>"+upList.get(btnList.indexOf(b)).getName()+"<br> " + visitor.visit(upList.get(btnList.indexOf(b))) + "</center></html>");
-					
-				}
-			});
-			
-			b.setSize(120, 60);
-			upgradePanel.add(b);
-		}
+		Upgrade u = upList.get(upList.size()-1);
+		btnList.add(new JButton("<html><center>"+u.getName()+"<br> " + visitor.visit(u) + "</center></html>"));
+		
 		upgradePanel.repaint();
 	}
 }
