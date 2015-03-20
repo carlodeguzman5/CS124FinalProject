@@ -16,7 +16,7 @@ public class AttackState implements State{
 	}
 
 	@Override
-	public void reachedPlayer() {
+	public void reachedPlayer() { 
 		// TODO Auto-generated method stub
 		
 	}
