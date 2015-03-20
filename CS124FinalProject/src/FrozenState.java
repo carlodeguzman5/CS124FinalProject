@@ -10,7 +10,7 @@ public class FrozenState implements State {
 	public void defaultAction() {
 	
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 			z.state = new DefaultState(z);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

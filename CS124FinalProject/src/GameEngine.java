@@ -161,6 +161,14 @@ public class GameEngine extends Canvas{
 	}
 	
 	public synchronized void checkGameState(){
+		
+		for(int i = 0; i < zombieList.size(); i++){
+			if(Math.pow(zombieList.get(i).xpos-centerX,2)+ Math.pow(zombieList.get(i).ypos-centerY, 2) < Math.pow(400, 2) ){
+				character.registerObserver(zombieList.get(i));
+			}
+		
+		}
+		
 		/*
 		 * Setting infoFrame Damage
 		 * Checking if stage is done
@@ -190,6 +198,7 @@ public class GameEngine extends Canvas{
 					if(zombieList.get(i).damage(character.getDamage())){
 						zombieList.get(i).killThread();
 						gold += zombieList.get(i).getBounty();
+						character.removeObserver(zombieList.get(i));
 						zombieList.remove(zombieList.get(i));
 						totalZombieKilled++;
 						zombieKilled++;

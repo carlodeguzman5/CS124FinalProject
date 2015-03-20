@@ -5,20 +5,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class NormalZombie extends Zombie{
+public class StrongZombie extends Zombie{
 	private final int SPAWN_RADIUS = 250;
 	private BufferedImage image;
 	
-	public NormalZombie() {	
+	public StrongZombie() {	
 		try {
 			image = ImageIO.read(new File("img/Zombie.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		health = 5; // Static Zombie Health
-		damage = 10;// Static Zombie Damage
-		bounty = 1; // Static Kill Bounty
+		health = 10; // Static Zombie Health
+		damage = 25;// Static Zombie Damage
+		bounty = 10; // Static Kill Bounty
 		
 		int deg = (int) (Math.random() * 360);
 		
@@ -31,7 +31,7 @@ public class NormalZombie extends Zombie{
   
 	@Override
 	public void draw(Graphics g){
-		g.drawImage(image, xpos-getSize()/2, ypos-getSize()/2, getSize(), getSize(), null);
+		g.drawImage(image, xpos-(getSize()+10)/2, ypos-(getSize()+10)/2, getSize()+10, getSize()+10, null);
 	}
 	
 	@Override

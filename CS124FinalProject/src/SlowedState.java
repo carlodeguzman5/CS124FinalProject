@@ -1,3 +1,9 @@
+import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.JProgressBar;
+
 
 public class SlowedState implements State{
 	Zombie z;
@@ -6,49 +12,38 @@ public class SlowedState implements State{
 	}
 	@Override
 	public void defaultAction() {
-		
+		Timer timer = new Timer();
+		timer.schedule(new SlowTimer(), 5000);
 		try {
-			Thread.sleep(25);
+			Thread.sleep(70);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(Math.pow(z.xpos-z.getTargetX(),2) + Math.pow(z.ypos-z.getTargetY(),2) <= 10000 ){
+		if(Math.pow(z.xpos-z.getTargetX(),2) + Math.pow(z.ypos-z.getTargetY(),2) <= 400 ){
 			z.state = new AttackState(z);
 		}
 		else{
 			if(z.getTargetX() < z.xpos){
 				z.xpos--;
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 			if(z.getTargetX() > z.xpos){
 				z.xpos++;
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 			if(z.getTargetY() < z.ypos){
 				z.ypos--;
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 			if(z.getTargetY() > z.ypos){
 				z.ypos++;
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
+		}
+	}
+	
+	class SlowTimer extends TimerTask{
+		@Override
+		public void run() {
+			z.state = new DefaultState(z);
 		}
 		
 	}
+	
 }
