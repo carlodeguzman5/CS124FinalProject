@@ -1,2 +1,2 @@
-# CS 124: Object Oriented Software Design and Implementation
+CS 124: Object Oriented Software Design and Implementation
 # Final Project
